@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajinkya Akole - Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #065f46;
+            --primary-light: #059669;
+            --primary-lighter: #d1fae5;
+            --primary-pale: #ecfdf5;
+            --text: #1e293b;
+            --text-light: #475569;
+            --text-lighter: #64748b;
+            --bg: #ffffff;
+            --border: #e2e8f0;
+            --accent: #b45309;
+            --accent-light: #fef3c7;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: #e8ece9;
+            line-height: 1.4;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== RESUME CONTAINER ===== */
+        .resume-container {
+            max-width: 210mm;
+            margin: 24px auto;
+            background: var(--bg);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.13);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Top accent bar */
+        .resume-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--accent));
+        }
+
+        .resume-inner {
+            padding: 11mm 13mm 9mm;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid var(--primary-lighter);
+        }
+
+        .name {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 25px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3px 0;
+            font-size: 9px;
+            color: var(--text-light);
+        }
+
+        .contact-row .sep {
+            margin: 0 7px;
+            color: var(--border);
+            font-size: 10px;
+        }
+
+        .contact-row a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .contact-row a:hover { color: var(--primary); }
+
+        .cert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            background: var(--primary-pale);
+            color: var(--primary);
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 8.5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+
+        .cert-badge:hover {
+            background: var(--primary-lighter);
+        }
+
+        .cert-badge svg { width: 10px; height: 10px; }
+
+        /* ===== SECTIONS ===== */
+        .section { margin-bottom: 9px; }
+
+        .section-title {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid var(--primary-lighter);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-title .dot {
+            width: 5px; height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ===== SUMMARY ===== */
+        .summary {
+            font-size: 9px;
+            line-height: 1.55;
+            color: var(--text);
+            text-align: justify;
+        }
+
+        .summary strong { color: var(--primary); font-weight: 600; }
+
+        /* ===== SKILLS ===== */
+        .skills-grid {
+            font-size: 9px;
+            line-height: 1.55;
+        }
+
+        .skill-category { margin-bottom: 1px; }
+
+        .skill-label {
+            font-weight: 700;
+            color: var(--primary);
+            display: inline;
+        }
+
+        .skill-tags {
+            display: inline;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: var(--primary-pale);
+            color: var(--primary);
+            padding: 0px 5px;
+            border-radius: 3px;
+            font-size: 8px;
+            font-weight: 500;
+            margin: 1px 2px 1px 0;
+        }
+
+        /* ===== PROJECTS ===== */
+        .project { margin-bottom: 7px; }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1px;
+            gap: 8px;
+        }
+
+        .project-title {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .project-tech {
+            font-size: 8px;
+            color: var(--primary-light);
+            font-weight: 600;
+            white-space: nowrap;
+            background: var(--primary-pale);
+            padding: 1px 6px;
+            border-radius: 3px;
+        }
+
+        .project-bullets {
+            padding-left: 13px;
+            font-size: 8.5px;
+            line-height: 1.45;
+            color: var(--text);
+        }
+
+        .project-bullets li { margin-bottom: 1px; }
+        .project-bullets li::marker { color: var(--primary-light); font-size: 8px; }
+
+        /* ===== EDUCATION ===== */
+        .edu-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .edu-degree { font-size: 9px; font-weight: 600; }
+        .edu-score { font-size: 9px; color: var(--text-light); font-weight: 500; }
+        .edu-sub { font-size: 8.5px; color: var(--text-lighter); margin-bottom: 1px; }
+
+        /* ===== CERTIFICATIONS ===== */
+        .cert-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px 14px;
+            font-size: 8.5px;
+        }
+
+        .cert-item {
+            padding: 2px 0;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .cert-item::before {
+            content: '';
+            width: 4px; height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .cert-verify-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 4px;
+            font-size: 8.5px;
+            color: var(--primary-light);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .cert-verify-link:hover { color: var(--primary); }
+
+        .cert-verify-link svg { width: 10px; height: 10px; }
+
+        /* ===== ACHIEVEMENTS ===== */
+        .achievements {
+            padding-left: 13px;
+            font-size: 8.5px;
+            line-height: 1.5;
+        }
+
+        .achievements li::marker { color: var(--accent); font-size: 8px; }
+
+        /* ===== LANGUAGES ===== */
+        .languages {
+            font-size: 9px;
+            color: var(--text);
+        }
+
+        .lang-item {
+            display: inline-block;
+            margin-right: 12px;
+        }
+
+        .lang-name { font-weight: 600; }
+        .lang-level { color: var(--text-lighter); font-size: 8px; }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body { background: white; }
+            .resume-container {
+                margin: 0; padding: 0;
+                box-shadow: none; max-width: none;
+            }
+            .resume-container::before { height: 3px; }
+            .resume-inner { padding: 9mm 11mm 7mm; }
+            .no-print { display: none !important; }
+            .cert-badge { background: none; color: var(--primary); padding: 0; font-size: 9px; }
+            .cert-verify-link { color: var(--primary); text-decoration: underline; }
+            .project-tech { background: none; }
+            .skill-tag { background: none; padding: 0; font-size: 9px; }
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        /* ===== ACTION BAR ===== */
+        .action-bar {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .action-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(6,95,70,0.3);
+        }
+
+        .action-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(6,95,70,0.35);
+        }
+
+        .action-btn svg { width: 15px; height: 15px; }
+
+        /* ===== CERTIFICATIONS MODAL ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 30px 16px;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-box {
+            background: white;
+            border-radius: 16px;
+            max-width: 780px;
+            width: 100%;
+            padding: 36px;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px; right: 14px;
+            width: 36px; height: 36px;
+            border: none;
+            background: #f1f5f9;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: var(--text-light);
+            font-family: inherit;
+        }
+
+        .modal-close:hover { background: #e2e8f0; color: var(--text); }
+
+        .modal-header {
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--primary-lighter);
+        }
+
+        .modal-header h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 26px;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .modal-header p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .modal-header .cert-count {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .cert-cards { display: flex; flex-direction: column; gap: 12px; }
+
+        .cert-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 22px;
+            transition: all 0.25s;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .cert-card:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 2px 12px rgba(6,95,70,0.08);
+            transform: translateX(3px);
+        }
+
+        .cert-card-icon {
+            width: 42px; height: 42px;
+            background: var(--primary-pale);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cert-card-icon svg { width: 22px; height: 22px; color: var(--primary); }
+
+        .cert-card-body { flex: 1; }
+
+        .cert-card-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text);
+            margin-bottom: 3px;
+        }
+
+        .cert-card-issuer {
+            font-size: 12px;
+            color: var(--primary-light);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .cert-card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 11px;
+            color: var(--text-lighter);
+        }
+
+        .cert-card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .cert-card-meta svg { width: 12px; height: 12px; }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            background: var(--primary-pale);
+            color: var(--primary);
+            padding: 1px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .verified-badge svg { width: 10px; height: 10px; }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 2000;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 16px rgba(6,95,70,0.3);
+            pointer-events: none;
+        }
+
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 800px) {
+            .resume-container { margin: 10px; }
+            .resume-inner { padding: 8mm 7mm 6mm; }
+            .action-bar { top: 8px; right: 8px; }
+            .action-btn { padding: 7px 12px; font-size: 11px; }
+            .modal-box { padding: 24px 18px; }
+            .cert-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Action Buttons -->
+    <div class="action-bar no-print">
+        <button class="action-btn" onclick="window.print()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Save as PDF
+        </button>
+        <button class="action-btn" onclick="openCertModal()" style="background:var(--accent);box-shadow:0 2px 8px rgba(180,83,9,0.3);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg>
+            Verify Certifications
+        </button>
+    </div>
+
+    <!-- ===== RESUME ===== -->
+    <div class="resume-container" id="resume">
+        <div class="resume-inner">
+
+            <!-- Header -->
+            <header class="header">
+                <div class="name">Ajinkya Sanjay Akole</div>
+                <div class="contact-row">
+                    <span>ajinkyaakole22@gmail.com</span>
+                    <span class="sep">|</span>
+                    <span>+91 8625998945</span>
+                    <span class="sep">|</span>
+                    <span>Solapur, Maharashtra, India</span>
+                    <span class="sep">|</span>
+                    <a href="https://linkedin.com/in/ajinkyaakole10" target="_blank">LinkedIn</a>
+                    <span class="sep">|</span>
+                    <a href="https://github.com/ajinkya12112001" target="_blank">GitHub</a>
+                    <span class="sep">|</span>
+                    <a href="https://ajinkya12112001.github.io/certifications" target="_blank" class="cert-badge" onclick="event.preventDefault();openCertModal();">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-2 5l2-1l2 1l-2-5z"/><circle cx="12" cy="9" r="6"/></svg>
+                        9 Certifications Verified
+                    </a>
+                </div>
+            </header>
+
+            <!-- Professional Summary -->
+            <section class="section">
+                <div class="section-title"><span class="dot"></span>Professional Summary</div>
+                <p class="summary">
+                    Results-driven <strong>BCA graduate</strong> with a <strong>9.58 CGPA</strong>, specializing in <strong>Software Development, Data Analytics, and Full-Stack Web Development</strong>. Proficient in <strong>Java, Python, and SQL</strong> with hands-on experience building end-to-end web applications using <strong>Django</strong>. Skilled in <strong>Data Visualization (Power BI), Cloud ML (AWS), SQL Analytics (Databricks), and Generative AI tools</strong>. Proven ability to design, develop, and deploy solutions addressing real-world problems with strong foundations in <strong>DSA, OOP, SDLC, and MVC architecture</strong>. A collaborative communicator with demonstrated leadership and a consistent record of academic excellence.
+                </p>
+            </section>
+
+            <!-- Technical Skills -->
+            <section class="section">
+                <div class="section-title"><span class="dot"></span>Technical Skills</div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <span class="skill-label">Languages: </span>
+                        <span class="skill-tags">
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                        </span>
+                    </div>
+                    <div class="skill-category">
+                        <span class="skill-label">Frameworks &amp; APIs: </span>
+                        <span class="skill-tags">
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">REST API</span>
+                            <span class="skill-tag">Databricks</span>
+                        </span>
+                    </div>
+                    <div class="skill-category">
+                        <span class="skill-label">Data &amp; Analytics: </span>
+                        <span class="skill-tags">
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">Advanced Excel</span>
+                            <span class="skill-tag">SQL Analytics</span>
+                            <span class="skill-tag">AWS Machine Learning</span>
+                        </span>
+                    </div>
+                    <div class="skill-category">
+                        <span class="skill-label">AI / ML: </span>
+                        <span class="skill-tags">
+                            <span class="skill-tag">Generative AI</span>
+                            <span class="skill-tag">Google GenAI Studio</span>
+                            <span class="skill-tag">Prompt Engineering</span>
+                            <span class="skill-tag">GitHub Copilot</span>
+                            <span class="skill-tag">Claude AI</span>
+                        </span>
+                    </div>
+                    <div class="skill-category">
+                        <span class="skill-label">Tools: </span>
+                        <span class="skill-tags">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">VS Code</span>
+                        </span>
+                    </div>
+                    <div class="skill-category">
+                        <span class="skill-label">Core Concepts: </span>
+                        <span class="skill-tags">
+                            <span class="skill-tag">DSA</span>
+                            <span class="skill-tag">OOP</span>
+                            <span class="skill-tag">MVC/MVT</span>
+                            <span class="skill-tag">SDLC</span>
+                            <span class="skill-tag">Problem Solving</span>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section class="section">
+                <div class="section-title"><span class="dot"></span>Projects</div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <span class="project-title">Her Safe Path 2.0 — Women Safety Platform</span>
+                        <span class="project-tech">Python | Django | REST API</span>
+                    </div>
+                    <ul class="project-bullets">
+                        <li>Engineered an enhanced safety platform with real-time notifications, role-based access control (authorities, volunteers, users), and a comprehensive admin dashboard.</li>
+                        <li>Redesigned UI/UX for improved accessibility; implemented interactive map-based location flagging and emergency alert system with secure authentication.</li>
+                    </ul>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <span class="project-title">Her Safe Path — Women Safety Web Application</span>
+                        <span class="project-tech">Python | Django</span>
+                    </div>
+                    <ul class="project-bullets">
+                        <li>Developed a web platform enabling women to report unsafe locations and access emergency contacts with secure user authentication.</li>
+                        <li>Implemented interactive map-based location flagging and alert system for real-time safety awareness.</li>
+                    </ul>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <span class="project-title">Greeneria — Farmer Assistant AgriTech Platform</span>
+                        <span class="project-tech">Python | Django</span>
+                    </div>
+                    <ul class="project-bullets">
+                        <li>Built a farmer-focused platform providing crop guidance, market price information, and weather alerts using Django-driven architecture.</li>
+                        <li>Designed UI optimized for rural and low-tech users with intuitive navigation and accessible design patterns.</li>
+                    </ul>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <span class="project-title">Online Parking System</span>
+                        <span class="project-tech">Java | OOP</span>
+                    </div>
+                    <ul class="project-bullets">
+                        <li>Designed a parking management system with automated slot allocation and billing logic applying core OOP principles.</li>
+                        <li>Implemented inheritance, encapsulation, and polymorphism for maintainable and scalable code architecture.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Education -->
+            <section class="section">
+                <div class="section-title"><span class="dot"></span>Education</div>
+                <div class="edu-row">
+                    <span class="edu-degree">Bachelor of Computer Applications (BCA)</span>
+                    <span class="edu-score">2023 – 2026 | CGPA: 9.58</span>
+                </div>
+                <div class="edu-sub">1st Year: 90.25% | 2nd Year: 88.00%</div>
+                <div class="edu-row">
+                    <span class="edu-degree">Higher Secondary Certificate (HSC)</span>
+                    <span class="edu-score">55.08%</span>
+                </div>
+                <div class="edu-row">
+                    <span class="edu-degree">Secondary School Certificate (SSC)</span>
+                    <span class="edu-score">66.20%</span>
+                </div>
+            </section>
+
+            <!-- Certifications -->
+            <section class="section">
+                <div class="section-title"><span class="dot"></span>Certifications</div>
+                <div class="cert-list">
+                    <div class="cert-item">Advanced Git Concepts</div>
+                    <div class="cert-item">AWS Foundations: Machine Learning Basics</div>
+                    <div class="cert-item">What Is Generative AI? — LinkedIn Learning</div>
+                    <div class="cert-item">Claude Code 101</div>
+                    <div class="cert-item">Introduction to Generative AI Studio — Google</div>
+                    <div class="cert-item">Prompt Engineering with GitHub Copilot</div>
+                    <div class="cert-item">OOPs in Java</div>
+                    <div class="cert-item">Power BI — Great Learning</div>
+                    <div class="cert-item">SQL Analytics &amp; BI on Databricks</div>
+                </div>
+                <a href="https://ajinkya12112001.github.io/certifications" target="_blank" class="cert-verify-link" onclick="event.preventDefault();openCertModal();">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Click to View &amp; Verify All 9 Certifications
+                </a>
+            </section>
+
+            <!-- Achievements -->
+            <section class="section">
+                <div class="section-title"><span class="dot"></span>Achievements</div>
+                <ul class="achievements">
+                    <li>16-time voluntary blood donor — Certificate of Appreciation for outstanding social contribution</li>
+                    <li>State-level football player — represented college at regional tournaments</li>
+                    <li>Recognized for consistent academic excellence (CGPA 9.58) and leadership in college initiatives</li>
+                </ul>
+            </section>
+
+            <!-- Languages -->
+            <section class="section" style="margin-bottom:0;">
+                <div class="section-title"><span class="dot"></span>Languages</div>
+                <div class="languages">
+                    <span class="lang-item"><span class="lang-name">English</span> <span class="lang-level">(Professional)</span></span>
+                    <span class="lang-item"><span class="lang-name">Hindi</span> <span class="lang-level">(Professional)</span></span>
+                    <span class="lang-item"><span class="lang-name">Marathi</span> <span class="lang-level">(Native)</span></span>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- ===== CERTIFICATIONS MODAL ===== -->
+    <div class="modal-overlay" id="certModal" role="dialog" aria-modal="true" aria-label="Certifications Portfolio">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeCertModal()" aria-label="Close">&times;</button>
+
+            <div class="modal-header">
+                <h2>Certifications Portfolio</h2>
+                <p>Ajinkya Sanjay Akole — Verified Professional Certifications <span class="cert-count">9 Certificates</span></p>
+            </div>
+
+            <div class="cert-cards">
+
+                <!-- 1 -->
+                <div class="cert-card">
+                    <div class="cert-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="1.05" y1="12" x2="7" y2="12"/><line x1="17.01" y1="12" x2="22.96" y2="12"/></svg>
+                    </div>
+                    <div class="cert-card-body">
+                        <div class="cert-card-title">Advanced Git Concepts</div>
+                        <div class="cert-card-issuer">Professional Certification</div>
+                        <div class="cert-card-meta">
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> May 9, 2026</span>
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Code: 10206996</span>
+                            <span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="cert-card">
+                    <div class="cert-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                    </div>
+                    <div class="cert-card-body">
+                        <div class="cert-card-title">AWS Foundations: Machine Learning Basics</div>
+                        <div class="cert-card-issuer">Amazon Web Services (AWS)</div>
+                        <div class="cert-card-meta">
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> May 9, 2026</span>
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Code: 10206840</span>
+                            <span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="cert-card">
+                    <div class="cert-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <div class="cert-card-body">
+                        <div class="cert-card-title">What Is Generative AI?</div>
+                        <div class="cert-card-issuer">LinkedIn Learning — 1 hr 3 min</div>
+                        <div class="cert-card-meta">
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> May 9, 2026</span>
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> ID: 3c7d596f...ae180</span>
+                            <span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="cert-card">
+                    <div class="cert-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <div class="cert-card-body">
+                        <div class="cert-card-title">Claude Code 101</div>
+                        <div class="cert-card-issuer">Anthropic — Claude AI</div>
+                        <div class="cert-card-meta">
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> May 12, 2026</span>
+                            <span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="cert-card">
+                    <div class="cert-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <div class="cert-card-body">
+                        <div class="cert-card-title">Introduction to Generative AI Studio</div>
+                        <div class="cert-card-issuer">Google Cloud</div>
+                        <div class="cert-card-meta">
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> May 8, 2026</span>
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Code: 10205030</span>
+                            <span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6 -->
+                <div class="cert-card">
+                    <div class="cert-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <div class="cert-card-body">
+                        <div class="cert-card-title">Introduction to Prompt Engineering with GitHub Copilot</div>
+                        <div class="cert-card-issuer">GitHub — Microsoft</div>
+                        <div class="cert-card-meta">
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> May 12, 2026</span>
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Code: 10216803</span>
+                            <span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7 -->
+                <div class="cert-card">
+                    <div class="cert-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>
+                    </div>
+                    <div class="cert-card-body">
+                        <div class="cert-card-title">OOPs in Java</div>
+                        <div class="cert-card-issuer">Professional Certification</div>
+                        <div class="cert-card-meta">
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> May 8, 2026</span>
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Code: 10205417</span>
+                            <span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8 -->
+                <div class="cert-card">
+                    <div class="cert-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <div class="cert-card-body">
+                        <div class="cert-card-title">Power BI</div>
+                        <div class="cert-card-issuer">Great Learning</div>
+                        <div class="cert-card-meta">
+                            <span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>
+                            <span><a href="https://www.mygreatlearning.com/certificate/KTUIVNSA" target="_blank" style="color:var(--primary-light);font-weight:600;">Verify Online →</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9 -->
+                <div class="cert-card">
+                    <div class="cert-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                    </div>
+                    <div class="cert-card-body">
+                        <div class="cert-card-title">Get Started with SQL Analytics and BI on Databricks</div>
+                        <div class="cert-card-issuer">Databricks</div>
+                        <div class="cert-card-meta">
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> May 8, 2026</span>
+                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Code: 10205307</span>
+                            <span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Modal functions
+        function openCertModal() {
+            const modal = document.getElementById('certModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Focus trap
+            modal.querySelector('.modal-close').focus();
+        }
+
+        function closeCertModal() {
+            const modal = document.getElementById('certModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeCertModal();
+        });
+
+        // Close on overlay click
+        document.getElementById('certModal').addEventListener('click', function(e) {
+            if (e.target === e.currentTarget) closeCertModal();
+        });
+
+        // Auto-open modal if URL has ?certifications parameter
+        if (new URLSearchParams(window.location.search).has('certifications')) {
+            setTimeout(openCertModal, 300);
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Keyboard accessibility for cert badge
+        document.querySelectorAll('.cert-badge, .cert-verify-link').forEach(function(el) {
+            el.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openCertModal();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
